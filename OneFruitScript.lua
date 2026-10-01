@@ -1,451 +1,472 @@
-local Q = "LVL 1"
-local QTP = "LVL 1"
-local ITP = "Starter Island"
-local MTP = "Bandit"
-local MTPCD = 1
-local W = 1
-local SB = "M1"
-local CD = 0.1
+local Q
+local QTP
+local ITP
+local MTP
+local MTPCD
+local W
+local SB
+local CD
 
-getgenv().APunch = false
-getgenv().ADef = false
-getgenv().AQuest = false
-getgenv().ASSpam = false
-getgenv().AMob = false
-
-local function FireCombat(skill)
-    local args = {
-        [1] = {
-            [1] = {
-                [1] = "\3",
-                [2] = "Combat",
-                [3] = skill,
-                [4] = false,
-                [5] = game:GetService("Players").LocalPlayer.Character.Combat,
-                [6] = "Melee"
-            }
-        }
-    }
-    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-end
-
-local function FireDefense()
-    local args = {
-        [1] = {
-            [1] = {
-                [1] = "\3",
-                [2] = "Defence",
-                [3] = game:GetService("Players").LocalPlayer.Character.Defence,
-                [4] = "Defence"
-            }
-        }
-    }
-    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-end
-
-local function FireQuest(level)
-    local questMap = {
-        ["LVL 1"] = 1,
-        ["LVL 10"] = 2,
-        ["LVL 20"] = 3,
-        ["LVL 35"] = 4,
-        ["LVL 50"] = 5,
-        ["LVL 60"] = 6,
-        ["LVL 75"] = 7,
-        ["LVL 90"] = 8,
-        ["LVL 100"] = 9,
-        ["LVL 120"] = 10,
-        ["LVL 135"] = 11,
-        ["LVL 150"] = 12,
-        ["LVL 170"] = 13,
-        ["LVL 185"] = 14,
-        ["LVL 200"] = 15,
-    }
-    local id = questMap[level]
-    if id then
-        local args = {
-            [1] = {
-                [1] = {
-                    [1] = "\7",
-                    [2] = "GetQuest",
-                    [3] = id
-                }
-            }
-        }
-        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-    end
-end
-
-local function FireSkillRelease(wpn, skillName, delay)
-    local args = {
-        [1] = {
-            [1] = {
-                [1] = "\3",
-                [2] = "skillsControl",
-                [3] = wpn,
-                [4] = skillName,
-                [5] = "Release",
-                [6] = Vector3.new(game:GetService("Players").LocalPlayer:GetMouse().Hit)
-            }
-        }
-    }
-    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
-    wait(delay)
-end
-
-local function TPTo(PCFrame)
-    local plr = game.Players.LocalPlayer
-    if plr and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-        plr.Character.HumanoidRootPart.CFrame = PCFrame
-    end
-end
+getgenv().APunch = false;
+getgenv().ADef = false;
+getgenv().AQuest = false;
+getgenv().ASSpam = false;
+getgenv().AMob = false;
 
 function AutoPunch()
-    spawn(function()
-        while getgenv().APunch do
-            for i = 1, 5 do
-                FireCombat(i)
-                wait(0.1)
-            end
+    spawn(function ()
+        while getgenv().APunch == true do
+local args = {[1] = {[1] = {[1] = "\3",[2] = "Combat",[3] = 1,[4] = false,[5] = game:GetService("Players").LocalPlayer.Character.Combat,[6] = "Melee"}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1)
+local args = {[1] = {[1] = {[1] = "\3",[2] = "Combat",[3] = 2,[4] = false,[5] = game:GetService("Players").LocalPlayer.Character.Combat,[6] = "Melee"}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1)
+local args = {[1] = {[1] = {[1] = "\3",[2] = "Combat",[3] = 3,[4] = false,[5] = game:GetService("Players").LocalPlayer.Character.Combat,[6] = "Melee"}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1)
+local args = {[1] = {[1] = {[1] = "\3",[2] = "Combat",[3] = 4,[4] = false,[5] = game:GetService("Players").LocalPlayer.Character.Combat,[6] = "Melee"}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1)
+local args = {[1] = {[1] = {[1] = "\3",[2] = "Combat",[3] = 5,[4] = false,[5] = game:GetService("Players").LocalPlayer.Character.Combat,[6] = "Melee"}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1)
         end
     end)
 end
-
 function AutoDefense()
-    spawn(function()
-        while getgenv().ADef do
-            FireDefense()
-            wait(0.1)
+    spawn(function ()
+        while getgenv().ADef == true do
+local args = {[1] = {[1] = {[1] = "\3",[2] = "Defence",[3] = game:GetService("Players").LocalPlayer.Character.Defence,[4] = "Defence"}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1)
         end
     end)
 end
-
 function AutoQuest()
-    spawn(function()
-        while getgenv().AQuest do
-            if Q then
-                FireQuest(Q)
-            end
-            wait(0.1)
+    spawn(function ()
+        while getgenv().AQuest == true do
+if Q == "LVL 1" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 1}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 10" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 2}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 20" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 3}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 35" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 4}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 50" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 5}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 60" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 6}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 75" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 7}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 90" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 8}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 100" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 9}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 120" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 10}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 135" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 11}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 150" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 12}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 170" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 13}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 185" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 14}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
+if Q == "LVL 200" then local args = {[1] = {[1] = {[1] = "\7",[2] = "GetQuest",[3] = 15}}} game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(0.1) end
         end
     end)
 end
-
 function SSPam(W, S, CD)
-    spawn(function()
-        while getgenv().ASSpam do
-            FireSkillRelease(W, S, CD)
+    spawn(function ()
+        while getgenv().ASSpam == true do
+local args = {[1] = {[1] = {[1] = "\3",[2] = "skillsControl",[3] = W,[4] = S,[5] = "Release",[6] = Vector3.new(game:GetService("Players").LocalPlayer:GetMouse().Hit)}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args)) wait(CD)
         end
     end)
 end
-
 function AutoMob(CDBTP)
-    spawn(function()
-        while getgenv().AMob do
-            if MTP == "Bandit" then
-                for _, name in ipairs({"Bandit1", "Bandit2", "Bandit3", "Bandit4", "Bandit5", "Bandit6", "Bandit7", "Bandit8", "Bandit9"}) do
-                    local mob = game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"][name]
-                    if mob and mob.NpcModel and mob.NpcModel:FindFirstChild("Torso") then
-                        TPTo(mob.NpcModel.Torso.CFrame)
-                        wait(CDBTP)
-                    end
-                end
-            elseif MTP == "Strong Bandit" then
-                for _, name in ipairs({"StrongBandit1", "StrongBandit2", "StrongBandit3", "StrongBandit4", "StrongBandit5", "StrongBandit6", "StrongBandit7", "StrongBandit8", "StrongBandit9"}) do
-                    local mob = game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"][name]
-                    if mob and mob.NpcModel and mob.NpcModel:FindFirstChild("Torso") then
-                        TPTo(mob.NpcModel.Torso.CFrame)
-                        wait(CDBTP)
-                    end
-                end
-            end
-            wait(0.1)
+    spawn(function ()
+        while getgenv().AMob == true do
+if MTP == "Bandit" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit7.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit8.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].Bandit9.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Strong Bandit" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit7.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit8.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].StrongBandit9.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Bandit Leader" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].BanditLeader1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_01"].BanditLeader2.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Monkey" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Monkey1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Monkey2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Monkey3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Monkey4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Monkey5.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Gorilla" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].Gorilla7.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "King Gorilla" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].KingGorilla1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_02"].KingGorilla2.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Clown" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].Clown1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].Clown2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].Clown3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].Clown4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].Clown5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].Clown6.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Killer Clown" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown7.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].KillerClown8.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Clown King" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_03"].ClownKing1.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Marine" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine7.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine8.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine9.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine10.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine11.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine12.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Marine13.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Marine Official" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial7.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial8.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial9.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial10.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial11.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial13.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial14.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].MarineOfficial15.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Lorgan" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_04"].Lorgan1.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Cat Pirate" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].CatPirate7.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Mansion Guard" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard1.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard2.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard3.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard4.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard5.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard6.NpcModel.Torso.CFrame) wait(CDBTP)
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].MansionGuard7.NpcModel.Torso.CFrame) wait(CDBTP)
+end
+if MTP == "Buros" then
+TPTo(game:GetService("Workspace")["__GAME"]["__Mobs"]["Ilha_05"].Buros1.NpcModel.Torso.CFrame) wait(CDBTP)
+end
         end
     end)
 end
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3"))()
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
 local w = library:CreateWindow("One Fruit Simulator")
 
 local b = w:CreateFolder("Autofarm")
 
-b:Toggle("Auto Punch", function(val)
-    getgenv().APunch = val
-    AutoPunch()
+b:Toggle("Auto Punch",function(val)
+getgenv().APunch = val
+AutoPunch()
 end)
 
-b:Toggle("Auto Defense", function(val)
-    getgenv().ADef = val
-    AutoDefense()
+b:Toggle("Auto Defense",function(val)
+getgenv().ADef = val
+AutoDefense()
 end)
 
-b:Toggle("Auto Take Quest", function(val)
-    getgenv().AQuest = val
-    AutoQuest()
+b:Toggle("Autofarm Mob",function(val)
+getgenv().AMob = val
+AutoMob(MTPCD)
 end)
 
-b:Toggle("Autofarm Mob", function(val)
-    getgenv().AMob = val
-    AutoMob(MTPCD)
+b:Box("CD Between TP","number",function(val)
+    MTPCD = val
 end)
 
-b:Box("CD Between TP", "number", function(val)
-    MTPCD = tonumber(val) or 1
+b:Toggle("Auto Take Quest",function(val)
+getgenv().AQuest = val
+AutoQuest()
 end)
 
-b:Dropdown("Mobs", {"Bandit", "Strong Bandit", "Bandit Leader", "Monkey", "Gorilla", "King Gorilla", "Clown", "Killer Clown", "Clown King", "Marine", "Marine Official", "Lorgan", "Cat Pirate", "Mansion Guard", "Buros"}, true, function(val)
+b:Dropdown("Mobs",{"Bandit","Stronga Bandit","Bandit Leader","Monkey","Gorilla","King Gorilla","Clown","Killer Clown","Clown King","Marine","Marine Official","Lorgan","Cat Pirate","Mansion Guard","Buros",},true,function(val)
     MTP = val
 end)
 
-b:Dropdown("Quest", {"LVL 1", "LVL 10", "LVL 20", "LVL 35", "LVL 50", "LVL 60", "LVL 75", "LVL 90", "LVL 100", "LVL 120", "LVL 135", "LVL 150", "LVL 170", "LVL 185", "LVL 200"}, true, function(val)
+b:Dropdown("Quest",{"LVL 1","LVL 10","LVL 20","LVL 35","LVL 50","LVL 60","LVL 75","LVL 90","LVL 100","LVL 120","LVL 135","LVL 150","LVL 170","LVL 185","LVL 200"},true,function(val)
     Q = val
 end)
 
-local b2 = w:CreateFolder("Skills")
+local b = w:CreateFolder("Skills")
 
-b2:Toggle("Spam Skill", function(val)
-    getgenv().ASSpam = val
-    SSPam(W, SB, CD)
+b:Toggle("Spam Skill",function(val)
+getgenv().ASSpam = val
+SSPam(W, SB, CD)
 end)
 
-b2:Box("Spam Cooldown", "yes", function(val)
-    CD = tonumber(val) or 0.1
+b:Box("Spam Cooldown","yes",function(val)
+    CD = val
 end)
 
-b2:Bind("Skill Bind Toggle", Enum.KeyCode.C, function()
-    local args = {
-        [1] = {
-            [1] = {
-                [1] = "\3",
-                [2] = "skillsControl",
-                [3] = W,
-                [4] = SB,
-                [5] = "Release",
-                [6] = Vector3.new(game:GetService("Players").LocalPlayer:GetMouse().Hit)
-            }
-        }
-    }
-    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+
+b:Bind("Skill Bind Toggle",Enum.KeyCode.C,function()
+local args = {[1] = {[1] = {[1] = "\3",[2] = "skillsControl",[3] = W,[4] = SB,[5] = "Release",[6] = Vector3.new(game:GetService("Players").LocalPlayer:GetMouse().Hit)}}}
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
 end)
 
-b2:Box("Weapon", "yes", function(val)
+b:Box("Weapon","yes",function(val)
     W = val
 end)
 
-b2:Box("Skill Bind", "yes", function(val)
+b:Box("Skill Bind","yes",function(val)
     SB = val
 end)
 
-local b3 = w:CreateFolder("Teleports")
+local b = w:CreateFolder("Teleports")
 
-b3:Dropdown("Quest TP", {"LVL 1", "LVL 10", "LVL 20", "LVL 35", "LVL 50", "LVL 60", "LVL 75", "LVL 90", "LVL 100", "LVL 120", "LVL 135", "LVL 150", "LVL 170", "LVL 185", "LVL 200"}, true, function(val)
+b:Dropdown("Quest TP",{"LVL 1","LVL 10","LVL 20","LVL 35","LVL 50","LVL 60","LVL 75","LVL 90","LVL 100","LVL 120","LVL 135","LVL 150","LVL 170","LVL 185","LVL 200"},true,function(val)
     QTP = val
 end)
 
-b3:Button("Teleport To Quest", function()
-    if QTP == "LVL 1" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest01.Torso.CFrame) end
-    if QTP == "LVL 10" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest02.Torso.CFrame) end
-    if QTP == "LVL 20" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest03.Torso.CFrame) end
-    if QTP == "LVL 35" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest04.Torso.CFrame) end
-    if QTP == "LVL 50" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest05.Torso.CFrame) end
-    if QTP == "LVL 60" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest06.Torso.CFrame) end
-    if QTP == "LVL 75" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest07.Torso.CFrame) end
-    if QTP == "LVL 90" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest08.Torso.CFrame) end
-    if QTP == "LVL 100" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest09.Torso.CFrame) end
-    if QTP == "LVL 120" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest10.Torso.CFrame) end
-    if QTP == "LVL 135" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest11.Torso.CFrame) end
-    if QTP == "LVL 150" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest12.Torso.CFrame) end
-    if QTP == "LVL 170" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest13.Torso.CFrame) end
-    if QTP == "LVL 185" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest14.Torso.CFrame) end
-    if QTP == "LVL 200" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest15.Torso.CFrame) end
+b:Button("Teleport To Quest",function()
+if QTP == "LVL 1" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest01.Torso.CFrame) end
+if QTP == "LVL 10" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest02.Torso.CFrame) end
+if QTP == "LVL 20" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest03.Torso.CFrame) end
+if QTP == "LVL 35" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest04.Torso.CFrame) end
+if QTP == "LVL 50" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest05.Torso.CFrame) end
+if QTP == "LVL 60" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest06.Torso.CFrame) end
+if QTP == "LVL 75" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest07.Torso.CFrame) end
+if QTP == "LVL 90" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest08.Torso.CFrame) end
+if QTP == "LVL 100" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest09.Torso.CFrame) end
+if QTP == "LVL 120" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest10.Torso.CFrame) end
+if QTP == "LVL 135" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest11.Torso.CFrame) end
+if QTP == "LVL 150" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest12.Torso.CFrame) end
+if QTP == "LVL 170" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest13.Torso.CFrame) end
+if QTP == "LVL 185" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest14.Torso.CFrame) end
+if QTP == "LVL 200" then TPTo(game:GetService("Workspace")["__GAME"]["__Quests"].Quest15.Torso.CFrame) end
 end)
 
-b3:Dropdown("Island TP", {"Starter Island", "Jungle", "Clown Island", "Grand City", "Snow Island"}, true, function(val)
+b:Dropdown("Island TP",{"Starter Island","Jungle","Clown Island","Grand City","Snow Island"},true,function(val)
     ITP = val
 end)
 
-b3:Button("Teleport To Island", function()
-    if ITP == "Starter Island" then TPTo(game:GetService("Workspace").Locations["Starter Island"].CFrame) end
-    if ITP == "Jungle" then TPTo(game:GetService("Workspace").Locations.Jungle.CFrame) end
-    if ITP == "Clown Island" then TPTo(game:GetService("Workspace").Locations["Clown Island"].CFrame) end
-    if ITP == "Grand City" then TPTo(game:GetService("Workspace").Locations["Grand City"].CFrame) end
-    if ITP == "Snow Island" then TPTo(game:GetService("Workspace").Locations["Snow Island"].CFrame) end
+b:Button("Teleport To Island",function()
+if ITP == "Starter Island" then TPTo(game:GetService("Workspace").Locations["Starter Island"].CFrame) end
+if ITP == "Jungle" then TPTo(game:GetService("Workspace").Locations.Jungle.CFrame) end
+if ITP == "Clown Island" then TPTo(game:GetService("Workspace").Locations["Clown Island"].CFrame) end
+if ITP == "Grand City" then TPTo(game:GetService("Workspace").Locations["Grand City"].CFrame) end
+if ITP == "Snow Island" then TPTo(game:GetService("Workspace").Locations["Snow Island"].CFrame) end
 end)
 
-local w2 = library:CreateWindow("Others")
-
-local S, J, H, G, C, CF = 16, 50, 0.1, 196.2, "", 1
-
-local b4 = w2:CreateFolder("LocalPlayer")
-
-b4:Box("Speed", "number", function(val)
-    S = tonumber(val) or 16
+local w = library:CreateWindow("Others")
+ 
+local S
+local J
+local H
+local G
+local C
+local CF
+ 
+local b = w:CreateFolder("LocalPlayer")
+ 
+b:Box("Speed","number",function(val)
+S = val
 end)
-
-b4:Box("Jump", "number", function(val)
-    J = tonumber(val) or 50
+b:Box("Jump","number",function(val)
+J = val
 end)
-
-b4:Box("Hip Height", "number", function(val)
-    H = tonumber(val) or 0.1
+b:Box("Hip Height","number",function(val)
+H = val
 end)
-
-b4:Box("Gravity", "number", function(val)
-    G = tonumber(val) or 196.2
+b:Box("Gravity","number",function(val)
+G = val
 end)
-
-b4:Toggle("Speed", function(bool)
-    getgenv().Speed = bool
-    Speed(S)
+ 
+b:Toggle("Speed",function(bool)
+getgenv().Speed = bool
+Speed(S)
 end)
-
-b4:Toggle("Jump", function(bool)
-    getgenv().Jump = bool
-    Jump(J)
+b:Toggle("Jump",function(bool)
+getgenv().Jump = bool
+Jump(J)
 end)
-
-b4:Toggle("Hip Height", function(bool)
-    getgenv().Hip = bool
-    Hip(H)
+b:Toggle("Hip Height",function(bool)
+getgenv().Hip = bool
+Hip(H)
 end)
-
-b4:Toggle("Gravity", function(bool)
-    getgenv().Grav = bool
-    Grav(G)
+b:Toggle("Gravity",function(bool)
+getgenv().Grav = bool
+Grav(G)
 end)
-
-b4:Slider("FOV (Default is 70)", {min = 0; max = 120; precise = true;}, function(val)
+ 
+b:Slider("FOV (Default is 70)",{min = 0;max = 120;precise = true;},function(val)
     game.workspace.CurrentCamera.FieldOfView = val
+    end)
+ 
+b:Button("Print Current XYZ",function()
+function GetPOS() return game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame end print(GetPOS())
 end)
-
-b4:Button("Print Current XYZ", function()
-    local function GetPOS()
-        return game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-    end
-    print(GetPOS())
-end)
-
-local b5 = w2:CreateFolder("Stuff")
-
-b5:Box("Chat", "Message", function(val)
+ 
+local b = w:CreateFolder("Stuff")
+ 
+b:Box("Chat","Message",function(val)
     C = val
 end)
-
-b5:Box("Cooldown", "Speed", function(val)
-    CF = tonumber(val) or 1
+ 
+b:Box("Cooldown","Speed",function(val)
+    CF = val
 end)
-
-b5:Toggle("Spam", function(bool)
+ 
+b:Toggle("Spam",function(bool)
     getgenv().Chat = bool
     Chat(C, CF)
 end)
-
-b5:Button("Rejoin", function()
+ 
+b:Button("Rejoin",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/NukeVsCity/TheALLHACKLoader/main/NukeLoader", true))()
 end)
-
-b5:Button("Giant", function()
+ 
+b:Button("Giant",function()
     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Universal-Syn-Saveinstance-14624", true))()
 end)
-
-b5:Button("Noclip", function()
+ 
+b:Button("Noclip",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua", true))()
 end)
-
-b5:Button("Reset", function()
+ 
+b:Button("Reset",function()
     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-RemainsHub-49836", true))()
 end)
-
-b5:Button("RTX Summer", function()
+ 
+b:Button("RTX Summer",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Oproxide/scripthub/refs/heads/main/main.lua", true))()
 end)
-
-b5:Button("RTX Autumn", function()
+ 
+b:Button("RTX Autumn",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/phareignxd/xemonscripts/refs/heads/main/antiloggerv2", true))()
 end)
-
-b5:Button("Anti-Report", function()
+ 
+b:Button("Anti-Report",function()
     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Delta-Keyboard-open-sourced-44576", true))()
 end)
-
-local b6 = w2:CreateFolder("Credits")
-
-b6:Label("Made by X_LuaF#0705", {
-    TextSize = 21,
-    TextColor = Color3.fromRGB(255,255,255),
-    BgColor = Color3.fromRGB(69,69,69)
+ 
+local b = w:CreateFolder("Credits")
+ 
+b:Label("Made by X_LuaF#0705",{
+    TextSize = 21;
+    TextColor = Color3.fromRGB(255,255,255);
+    BgColor = Color3.fromRGB(69,69,69);
 })
-
-b6:Button("Copy Discord Invite", function()
+ 
+b:Button("Copy Discord Invite",function()
     setclipboard("https://discord.gg/8tRb8MQcW5")
 end)
-
-b6:DestroyGui()
-
-getgenv().Speed = false
-getgenv().Jump = false
-getgenv().Hip = false
-getgenv().Chat = false
-getgenv().Grav = false
-
+ 
+b:DestroyGui()
+ 
+getgenv().Speed = false;
+getgenv().Jump = false;
+getgenv().Hip = false;
+getgenv().Chat = false;
+getgenv().Grav = false;
+ 
 function Chat(Mes, Freq)
-    spawn(function()
-        while getgenv().Chat do
-            local args = {Mes, "All"}
-            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-            wait(Freq)
+    spawn(function ()
+        while getgenv().Chat == true do
+local args = {[1] = Mes,[2] = "All"} game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+wait(Freq)
         end
     end)
 end
-
+ 
 function Speed(Nume)
-    spawn(function()
-        if getgenv().Speed then
-            while getgenv().Speed do
+    spawn(function ()
+        if getgenv().Speed == true then
+            while getgenv().Speed == true do
                 game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = Nume
                 wait()
             end
-        elseif not getgenv().Speed then
+        elseif getgenv().Speed == false then
             game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16
         end
     end)
 end
-
 function Jump(Nume)
-    spawn(function()
-        if getgenv().Jump then
-            while getgenv().Jump do
+    spawn(function ()
+        if getgenv().Jump == true then
+            while getgenv().Jump == true do
                 game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = Nume
                 wait()
-            end
-        elseif not getgenv().Jump then
+        end
+    elseif getgenv().Jump == false then
             game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = 50
         end
     end)
 end
-
 function Hip(Nume)
-    spawn(function()
-        if getgenv().Hip then
-            while getgenv().Hip do
-                game:GetService("Players").LocalPlayer.Character.Humanoid.HipHeight = Nume
-                wait()
-            end
-        elseif not getgenv().Hip then
+    spawn(function ()
+        if getgenv().Hip == true then
+            while getgenv().Hip == true do
+            game:GetService("Players").LocalPlayer.Character.Humanoid.HipHeight = Nume
+            wait()
+        end
+    elseif getgenv().Hip == false then
             game:GetService("Players").LocalPlayer.Character.Humanoid.HipHeight = 0.1
         end
     end)
 end
-
 function Grav(Nume)
-    spawn(function()
-        if getgenv().Grav then
-            while getgenv().Grav do
+    spawn(function ()
+        if getgenv().Grav == true then
+            while getgenv().Grav == true do
                 game:GetService("Workspace").Gravity = Nume
-                wait()
-            end
-        elseif not getgenv().Grav then
-            game:GetService("Workspace").Gravity = 196.2
+            wait()
+        end
+    elseif getgenv().Grav == false then
+        game:GetService("Workspace").Gravity = 196.2
         end
     end)
 end
+ 
+function TPTo(PCFrame)
+    local plr = game.Players.LocalPlayer;
+           if plr.Character then
+            plr.Character.HumanoidRootPart.CFrame = PCFrame
+        end
+    end
